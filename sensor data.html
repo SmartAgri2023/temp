@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Agri</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-top: 30px;
+    }
+    
+    .data {
+      display: inline-block;
+      width: 200px;
+      padding: 20px;
+      margin-top: 50px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    
+    .button-container {
+      margin-top: 30px;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: green;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.5s ease;
+    }
+    
+    .button.off {
+      background-color: #f44336;
+    }
+    
+    .button.off[disabled] {
+      background-color: #808080;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart Agri</h1>
+  
+  <div class="data">
+    <h2>Temperature</h2>
+    <p id="temperature">Loading...</p>
+  </div>
+  
+  <div class="data">
+    <h2>Humidity</h2>
+    <p id="humidity">Loading...</p>
+  </div>
+  
+  <div class="data">
+    <h2>Moisture</h2>
+    <p id="moisture">Loading...</p>
+  </div>
+  
+  <div class="button-container">
+    <button id="modeButton" onclick="toggleMode()" class="button">Auto</button>
+    <button id="powerButton" onclick="togglePower()" class="button" disabled style="background-color: #808080;">On</button>
+  </div>
+
+  <script>
+    var modeButton = document.getElementById('modeButton');
+    var powerButton = document.getElementById('powerButton');
+
+    function toggleMode() {
+      var mode = modeButton.innerText;
+      if (mode === 'manual') {
+        modeButton.innerText = 'auto';
+        modeButton.style.backgroundColor = 'green';
+        powerButton.style.backgroundColor = 'gray';
+        powerButton.disabled = true;
+      } else {
+        modeButton.innerText = 'manual';
+        modeButton.style.backgroundColor = 'red';
+        if (powerButton.innerText === 'On') {
+          powerButton.style.backgroundColor = 'green';
+        } else {
+          powerButton.style.backgroundColor = 'red';
+        }
+        powerButton.disabled = false;
+      }
+    }
+
+    function togglePower() {
+      var power = powerButton.innerText;
+      if (power === 'On') {
+        powerButton.innerText = 'Off';
+        powerButton.style.backgroundColor = 'red';
+      } else {
+        powerButton.innerText = 'On';
+        powerButton.style.backgroundColor = 'green';
+      }
+    }
+
+    // Replace the following code with your actual sensor data retrieval code
+
+    // Example: Update sensor data every second
+    setInterval(function() {
+      var temperature = Math.random() * 100; // Replace with actual temperature data
+      var humidity = Math.random() * 100; // Replace with actual humidity data
+      var moisture = Math.random() * 100; // Replace with actual moisture data
+
+      document.getElementById('temperature').innerText = temperature.toFixed(2);
+      document.getElementById('humidity').innerText = humidity.toFixed(3);
+      document.getElementById('moisture').innerText = moisture.toFixed(2);
+    }, 1000);
+  </script>
+</body>
+</html>
