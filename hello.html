@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <title>GET Request Example</title>
+    <script>
+        function sendGetRequest() {
+            var payload = {
+                "type": "get",
+                "farmer_id": 1001
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://agritechsolutions.rf.gd/pump.php?type=" + payload.type + "&farmer_id=" + payload.farmer_id, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("response").innerHTML = JSON.stringify(response, null, 2);
+                }
+            };
+            xhr.send();
+        }
+    </script>
 </head>
 <body>
-  <h1>hello</h1>
+    <h1>GET Request Example</h1>
+    <button onclick="sendGetRequest()">Send GET Request</button>
+    <pre id="response"></pre>
 </body>
 </html>
